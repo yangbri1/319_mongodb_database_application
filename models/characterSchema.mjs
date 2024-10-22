@@ -1,0 +1,56 @@
+import mongoose from 'mongoose';
+
+// creating a Mongoose schema for character
+const characterSchema = new mongoose.Schema({
+    // defining schema fields with their respective properties
+    name: {
+        type: String,
+        required: [true, 'Please include a name'],  // configuring custom error message using array syntax
+        unique: true        // setting "unique" property to true means there will be no duplicate names
+    },
+    // schema field "race" of schema type "String" , default to "human" & required 
+    race: {
+        type: String,
+        default: "human",
+        required: true,
+    },
+    // schema field "devil_fruit" of "Boolean" type, default to no powers & required
+    devil_fruit: {
+        type: Boolean,
+        default: false,
+        required: true
+    },
+    // schema field "bounty" must be of "Number" type & non-negative integer (natural number)
+    bounty: {
+        type: Number,
+        min: 0, 
+        message: "Must be at least 0, got {VALUE}",  // setting custom validator error message using object syntax
+        required: true,
+    },
+    // schema field "wanted" of type "String" in array of Strings is required 
+    wanted: {
+        type: String,
+        // enumeration
+        enum: {
+            values: ['Alive', 'Dead', 'Only Alive'],
+            // Mongoose implicitly replaces {VALUE} with value of validated
+            message: `{VALUE} is unsupported`
+        },
+        required: true,
+    }
+
+});
+
+// schema indexing by "bounty" field  in descending order (largest to smallest)
+characterSchema.index({bounty: -1});
+
+// defining schema method static 
+characterSchema.statics.wanted = function(){
+    // look for all characters with a wanted status of "Alive" using .find() method
+    return mongoose.model("Character").find({wanted: 'Alive'});
+}
+
+// calling mongoose.model() function makes a copy on "characterSchema" & Mongoose compiles it
+// export Mongoose model of key-value pair such that "Character" refers to "characterSchema" 
+// Note: Elsewhere calling on "Character" allows access to its fields with properties
+export default mongoose.model("Character", characterSchema);

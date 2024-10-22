@@ -14,7 +14,7 @@ const app = express();
 let PORT = process.env.PORT || 3001;
 
 /* DB connection */
-// invoke imported connectDB() function to create a connection
+// invoke imported connectDB() function to connect to MongoDB
 connectDB();
 
 // Aside: This one-liner works as well but will NOT disclose whenever connection fails
