@@ -33,7 +33,7 @@ const characterSchema = new mongoose.Schema({
         type: String,
         // enumeration
         enum: {
-            values: ['Alive', 'Dead', 'Only Alive'],
+            values: ['ALIVE', 'DEAD', 'ONLY ALIVE'],
             // Mongoose implicitly replaces {VALUE} with value of validated
             message: `{VALUE} is unsupported`
         },
