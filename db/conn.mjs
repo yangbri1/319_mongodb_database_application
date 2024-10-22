@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // initialize connectionString variable to intake environmental variable mongoURI
-const connectionString = process.env.mongURI;
+const connectionString = process.env.mongoURI;
 
 // "async" function required in order to use "await" (required to connect to database)
 export default async function connectDB(){

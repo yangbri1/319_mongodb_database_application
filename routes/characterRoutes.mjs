@@ -5,6 +5,11 @@ import Character from '../models/characterSchema.mjs';
 // initialize Express' Router instance
 const router = express.Router();
 
+// testing route
+router.get('/', (req, res) => {
+    res.send(`Testing routes`);
+});
+
 // Create
 
 // Read
