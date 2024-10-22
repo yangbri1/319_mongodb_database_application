@@ -1,3 +1,4 @@
+// characters database 
 export const characters = [
     {
         name: "Nami",
@@ -75,5 +76,5 @@ export const characters = [
         devil_fruit: true,
         // bounty: ,
         wanted: "Dead"
-    },
+    }
 ]

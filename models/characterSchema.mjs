@@ -1,3 +1,4 @@
+// import Mongoose to use built-in mongoose methods in creating character schema
 import mongoose from 'mongoose';
 
 // creating a Mongoose schema for character
