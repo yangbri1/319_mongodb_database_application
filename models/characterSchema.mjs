@@ -12,6 +12,7 @@ const characterSchema = new mongoose.Schema({
     race: {
         type: String,
         default: "human",
+        lowercase: true,    // schemaType option to lowercase 'race' before saving
         required: true,
     },
     // schema field "devil_fruit" of "Boolean" type, default to no powers & required
@@ -25,7 +26,6 @@ const characterSchema = new mongoose.Schema({
         type: Number,
         min: 0, 
         message: "Must be at least 0, got {VALUE}",  // setting custom validator error message using object syntax
-        required: true,
     },
     // schema field "wanted" of type "String" in array of Strings is required 
     wanted: {
@@ -36,7 +36,7 @@ const characterSchema = new mongoose.Schema({
             // Mongoose implicitly replaces {VALUE} with value of validated
             message: `{VALUE} is unsupported`
         },
-        required: true,
+        uppercase: true     // schemaType option converting 'wanted' statuses to uppercase before saving
     }
 
 });
@@ -44,7 +44,7 @@ const characterSchema = new mongoose.Schema({
 // schema indexing by "bounty" field  in descending order (largest to smallest)
 characterSchema.index({bounty: -1});
 
-// defining schema method static 
+// defining schema static method of "wanted" 
 characterSchema.statics.wanted = function(){
     // look for all characters with a wanted status of "Alive" using .find() method
     return mongoose.model("Character").find({wanted: 'Alive'});
