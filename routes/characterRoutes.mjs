@@ -60,6 +60,34 @@ router.get('/', async (req, res) => {
     }
 });
 
+// get all existing bounties
+router.get('/bounty', async (req, res) => {
+    try {
+        // collect all of the non-zero bounties
+        let bounties = await Character.bountyActive({});
+        // print out gathered bounties
+        res.json(bounties);
+    } catch (err) {
+        // console out errors
+        console.error(err);
+        res.status(500).json({msg: "Internal Server Error - GET Bounty"})
+    }
+});
+
+// find all "ALIVE" wanted status
+router.get('/status', async (req, res) => {
+    try {
+        // gather up all "ALIVE" wanted statuses
+        let status_alive = await Character.wantedStatus({});
+        // log out all characters given an "ALIVE" wanted status
+        res.json(status_alive);
+    } catch (err) {
+        // print out errors, error code, error message
+        console.error(err);
+        res.status(500).json({msg: "Iternal Server Error - GET Status"});
+    }
+});
+
 /* Update */
 // access an existing character by their :id & update their info
 router.patch('/:id', async (req, res) => {

@@ -48,16 +48,16 @@ const characterSchema = new mongoose.Schema({
 // schema indexing by "bounty" field  in descending order (largest to smallest)
 characterSchema.index({bounty: -1});
 
-// defining schema static method of "wanted" to Mongoose model
-characterSchema.statics.wantedStatus = function(){
-    // look for all characters with a wanted status of "Alive" using .find() method
-    return mongoose.model("Character").find({ wanted: 'Alive' });
-}
-
 // adding "bountyActive" static method to model -- every character will have this feature available
 characterSchema.statics.bountyActive = function(){
-    // check if the character has a bounty 
+    // check if the character has a bounty (non-zero)
     return mongoose.model("Character").find({bounty: { $gt: 0 }});
+}
+
+// defining schema static method of "wantedStatus" to Mongoose model
+characterSchema.statics.wantedStatus = function(){
+    // look for all characters with a wanted status presented using .find() method with $ne operator to make sure "Wanted" field is non-empty String
+    return mongoose.model("Character").find({ wanted: { $ne: "" } });
 }
 
 // calling mongoose.model() function makes a copy on "characterSchema" & Mongoose compiles it
