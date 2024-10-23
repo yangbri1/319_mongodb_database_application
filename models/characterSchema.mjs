@@ -7,6 +7,8 @@ const characterSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Please include a name'],  // configuring custom error message using array syntax
+        /* Note: MongoDB by default would create an unique ndex on "_id" field during collection creation
+         "name" field is now an unique index alongside "_id" (Could be seen on MongoDB Compass) */
         unique: true        // setting "unique" property to true means there will be no duplicate names
     },
     // schema field "race" of schema type "String" , default to "human" & required 
@@ -26,6 +28,7 @@ const characterSchema = new mongoose.Schema({
     bounty: {
         type: Number,
         min: 0, 
+        // Aside: {VALUE} in Mongoose will yield validated & failing value
         message: "Must be at least 0, got {VALUE}",  // setting custom validator error message using object syntax
     },
     // schema field "wanted" of type "String" in array of Strings is required 
@@ -45,10 +48,16 @@ const characterSchema = new mongoose.Schema({
 // schema indexing by "bounty" field  in descending order (largest to smallest)
 characterSchema.index({bounty: -1});
 
-// defining schema static method of "wanted" 
-characterSchema.statics.wanted = function(){
+// defining schema static method of "wanted" to Mongoose model
+characterSchema.statics.wantedStatus = function(){
     // look for all characters with a wanted status of "Alive" using .find() method
-    return mongoose.model("Character").find({wanted: 'Alive'});
+    return mongoose.model("Character").find({ wanted: 'Alive' });
+}
+
+// adding "bountyActive" static method to model -- every character will have this feature available
+characterSchema.statics.bountyActive = function(){
+    // check if the character has a bounty 
+    return mongoose.model("Character").find({bounty: { $gt: 0 }});
 }
 
 // calling mongoose.model() function makes a copy on "characterSchema" & Mongoose compiles it
