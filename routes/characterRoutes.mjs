@@ -44,6 +44,7 @@ router.get('/', async (req, res) => {
     // try-catch error handling to handle any possible extraneous errors
     try {
         // call Mongoose .find() function with empty object {} to query all documents from Character collection
+        // Aside: .find() method could look for documents fulfilling a single-field or compound fields
         const allCharacters = await Character.find({});
 
         // return all characters in JSON string format to client
@@ -61,10 +62,15 @@ router.get('/', async (req, res) => {
 // 
 router.patch('/:id', async (req, res) => {
     try {
+        /* Note: To use ANY Mongoose's methods, Mongoose must be connected to MongoDB which is here in "server.mjs" (connectDB() function invoked)
+        this is because Mongoose is an Object Data Modeling (ODM) library for MongoDB */
+        // utilize .findByIdAndUpdate() Mongoose method to 1) look for :id in req.params.id, 2) update data in req.body, 3) return updated data {new: true}
         let updatedCharacter = await Character.findByIdAndUpdate(req.params.id, req.body, {new: true});
         
     } catch (err) {
+        // display any error message onto CLI
         console.error(err);
+        // catch throw out custom error code & error message
         res.status(500).json({msg: "Internal Server Error - PATCH"});
     }
 });

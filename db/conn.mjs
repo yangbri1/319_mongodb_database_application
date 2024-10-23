@@ -12,7 +12,7 @@ const connectionString = process.env.mongoURI;
 export default async function connectDB(){
     // try-catch block for handling any errors during attempting to connect
     try {
-        // creating a Mongoose connection
+        // creating a Mongoose connection to MongoDB database (.env -- mongoURI provides connection string from MongoDB)
         // Note: {autoIndex: false} could be included alongside connectionString to hasten production (we don't deploy so not applicable for now)
         await mongoose.connect(connectionString);
         // console.log() output to terminal showing MongoDB connection is established
