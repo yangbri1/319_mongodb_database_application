@@ -33,6 +33,7 @@ router.post('/', async (req, res) => {
     } catch (err) {
         // console out error in command line interface
         console.error(err);
+
         // output custom error "500" and message to 
         res.status(500).json({msg: "Internal Server Error - POST"});
     }
@@ -46,20 +47,21 @@ router.get('/', async (req, res) => {
         // call Mongoose .find() function with empty object {} to query all documents from Character collection
         // Aside: .find() method could look for documents fulfilling a single-field or compound fields
         const allCharacters = await Character.find({});
-
+        
         // return all characters in JSON string format to client
         res.json(allCharacters);
         
     } catch (err) {
         // console out error in command line interface
         console.error(err);
+        
         // output custom error "500" and message to 
         res.status(500).json({msg: "Internal Server Error - GET"});
     }
 });
 
 /* Update */
-// 
+// access an existing character by their :id & update their info
 router.patch('/:id', async (req, res) => {
     try {
         /* Note: To use ANY Mongoose's methods, Mongoose must be connected to MongoDB which is here in "server.mjs" (connectDB() function invoked)
@@ -67,14 +69,33 @@ router.patch('/:id', async (req, res) => {
         // utilize .findByIdAndUpdate() Mongoose method to 1) look for :id in req.params.id, 2) update data in req.body, 3) return updated data {new: true}
         let updatedCharacter = await Character.findByIdAndUpdate(req.params.id, req.body, {new: true});
         
+        // return results to client as JSON string
+        res.json(updatedCharacter);
+
     } catch (err) {
         // display any error message onto CLI
         console.error(err);
+        
         // catch throw out custom error code & error message
         res.status(500).json({msg: "Internal Server Error - PATCH"});
     }
 });
 
 /* Delete */
+// access a character by their request parameters :id & permanently remove character from database
+router.delete('/:id', async (req, res) => {
+    try {
+        // find character by requested :id, delete & cache it to variable "deletedCharacter"
+        let deletedCharacter = await Character.findByIdAndDelete(req.params.id);
+
+        // call forth the deleted character from the database
+        res.json(deletedCharacter);
+        
+    } catch (err) {
+        // throw custom status with custom message if encounter an error
+        console.error(err);
+        res.status(500).json({msg: "Internal Server Error - DELETE"});
+    }
+});
 
 export default router;
