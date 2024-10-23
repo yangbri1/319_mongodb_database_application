@@ -56,8 +56,8 @@ characterSchema.statics.bountyActive = function(){
 
 // defining schema static method of "wantedStatus" to Mongoose model
 characterSchema.statics.wantedStatus = function(){
-    // look for all characters with a wanted status presented using .find() method with $ne operator to make sure "Wanted" field is non-empty String
-    return mongoose.model("Character").find({ wanted: { $ne: "" } });
+    // look for all characters with a wanted status presented using .find() method with $ne operator to make sure "Wanted" field is null (no String)
+    return mongoose.model("Character").find({ wanted: { $ne: null } }); // "" as value still shows all statuses
 }
 
 // calling mongoose.model() function makes a copy on "characterSchema" & Mongoose compiles it

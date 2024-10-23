@@ -60,6 +60,21 @@ router.get('/', async (req, res) => {
     }
 });
 
+// fetch single character by its unique "_id"
+router.get('/:id', async (req, res) => {
+    try {
+        // use Mongoose's .findById() method to query by document's "_id"
+        const singleCharacter = await Character.findById(req.params.id);
+        /* Aside: res.send() method will also work here, but since we are working with Express -- develop RESTful API's ... 
+        handling JSON data, may be better to use res.json() [converts to json stringify & res.send() at end anyways] */
+        res.json(singleCharacter);
+    } catch (err) {
+        // logs out error, status code, custom message if encounter error
+        console.error(err);
+        res.json({msg: "Internal Server Error - GET Character (singular)"}).status(500);
+    }
+});
+
 // get all existing bounties
 router.get('/bounty', async (req, res) => {
     try {
@@ -70,7 +85,7 @@ router.get('/bounty', async (req, res) => {
     } catch (err) {
         // console out errors
         console.error(err);
-        res.status(500).json({msg: "Internal Server Error - GET Bounty"})
+        res.status(500).json({msg: "Internal Server Error - GET All Bounties"})
     }
 });
 
@@ -84,7 +99,7 @@ router.get('/status', async (req, res) => {
     } catch (err) {
         // print out errors, error code, error message
         console.error(err);
-        res.status(500).json({msg: "Iternal Server Error - GET Status"});
+        res.status(500).json({msg: "Internal Server Error - GET Status"});
     }
 });
 
