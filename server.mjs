@@ -27,8 +27,11 @@ app.use(bodyParser.json({ extended: true }));           // parse out JSON data t
 /* routes */
 app.use('/characters', characterRoutes);    // incorporate characterRoutes into server
 
-// app.get('/', (req, res) => {
-//     res.send('Testing testing 1, 2, 3');
+// app.get('/names/name', (req, res) => {
+//     // to see Express' req.params properties
+//     // console.log(req.params.name);
+//     res.json(req.params.name);
+//     res.send(`mic check`);
 // });
 
 

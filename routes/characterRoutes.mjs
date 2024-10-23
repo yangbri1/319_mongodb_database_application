@@ -61,7 +61,7 @@ router.get('/', async (req, res) => {
 });
 
 // fetch single character by its unique "_id"
-// Side Note: required additional /character added to /characters else this get route overshadows all other child routes built on path /characters
+// Side Note: required additional req.path /character added to req.baseUrl /characters else this GET route overshadows all other child routes built on base Url path /characters afterwards
 router.get('/character/:id', async (req, res) => {
     try {
         // use Mongoose's .findById() method to query by document's "_id"

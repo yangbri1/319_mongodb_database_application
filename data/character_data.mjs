@@ -47,7 +47,7 @@ export const characters = [
         race: "Modified Humans",
         devil_fruit: false,
         bounty: 1032000000,
-        wanted: "Only Alive"
+        wanted: "Alive"
     },
     {
         name: "Lindberg",
