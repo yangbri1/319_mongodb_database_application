@@ -40,7 +40,7 @@ const characterSchema = new mongoose.Schema({
             // Mongoose implicitly replaces {VALUE} with value of validated
             message: `{VALUE} is unsupported`
         },
-        uppercase: true     // schemaType option converting 'wanted' statuses to uppercase before saving
+        uppercase: true // schemaType option converting 'wanted' statuses to uppercase before saving
     }
 
 });
@@ -58,6 +58,18 @@ characterSchema.statics.bountyActive = function(){
 characterSchema.statics.wantedStatus = function(){
     // look for all characters with a wanted status presented using .find() method with $ne operator to make sure "Wanted" field is null (no String)
     return mongoose.model("Character").find({ wanted: { $ne: null } }); // "" as value still shows all statuses
+}
+
+// schema static method of "wantedAlive" to Mongoose model
+characterSchema.statics.wantedAlive = function(){
+    // look for all characters with a wanted "ALIVE" status presented using .find() method 
+    return mongoose.model("Character").find({ wanted: "ALIVE" }); 
+}
+
+// schema static method of "wantedDead" to Mongoose model
+characterSchema.statics.wantedDead = function(){
+    // look for all characters with a wanted "DEAD" status presented using .find() method 
+    return mongoose.model("Character").find({ wanted: { $eq: "DEAD" } }); 
 }
 
 // calling mongoose.model() function makes a copy on "characterSchema" & Mongoose compiles it

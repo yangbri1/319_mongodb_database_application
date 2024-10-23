@@ -61,7 +61,8 @@ router.get('/', async (req, res) => {
 });
 
 // fetch single character by its unique "_id"
-router.get('/:id', async (req, res) => {
+// Side Note: required additional /character added to /characters else this get route overshadows all other child routes built on path /characters
+router.get('/character/:id', async (req, res) => {
     try {
         // use Mongoose's .findById() method to query by document's "_id"
         const singleCharacter = await Character.findById(req.params.id);
@@ -76,7 +77,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // get all existing bounties
-router.get('/bounty', async (req, res) => {
+router.get('/bounties', async (req, res) => {
     try {
         // collect all of the non-zero bounties
         let bounties = await Character.bountyActive({});
@@ -89,13 +90,41 @@ router.get('/bounty', async (req, res) => {
     }
 });
 
-// find all "ALIVE" wanted status
+// find all wanted status -- "DEAD" and "ALIVE"
 router.get('/status', async (req, res) => {
     try {
+        // gather up all wanted statuses
+        let status = await Character.wantedStatus({});
+        // log out all characters with any available wanted status
+        res.json(status);
+    } catch (err) {
+        // print out errors, error code, error message
+        console.error(err);
+        res.status(500).json({msg: "Internal Server Error - GET Status"});
+    }
+});
+
+// find all "ALIVE" wanted status
+router.get('/status/alive', async (req, res) => {
+    try {
         // gather up all "ALIVE" wanted statuses
-        let status_alive = await Character.wantedStatus({});
+        let status_alive = await Character.wantedAlive({});
         // log out all characters given an "ALIVE" wanted status
         res.json(status_alive);
+    } catch (err) {
+        // print out errors, error code, error message
+        console.error(err);
+        res.status(500).json({msg: "Internal Server Error - GET Status"});
+    }
+});
+
+// find all "DEAD" wanted status
+router.get('/status/dead', async (req, res) => {
+    try {
+        // gather up all "DEAD" wanted statuses
+        let status_dead = await Character.wantedDead({});
+        // log out all characters given an "DEAD" wanted status
+        res.json(status_dead);
     } catch (err) {
         // print out errors, error code, error message
         console.error(err);
