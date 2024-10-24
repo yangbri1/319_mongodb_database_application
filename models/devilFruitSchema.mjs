@@ -1,8 +1,8 @@
 // import Mongoose for creating schema
 import mongoose from 'mongoose';
 
-// generate a devil_fruit schema
-const devilfruitSchema = new mongoose.Schema({
+// generate a devil fruit schema
+const devilFruitSchema = new mongoose.Schema({
     // schema fields
     moniker: {
         // schema property types
@@ -13,9 +13,10 @@ const devilfruitSchema = new mongoose.Schema({
     type: {
         // array of string to choose from, if input property is invalid -- message would be prompted, defaults to "undefined" & convert to uppercase before output
         type: String,
-        enum: ["undefined", "Logia", "Paramecia", "Zoan", "Mythical Zoan", "Ancient Zoan"],
-        message: "{VALUE} is not a valid type of devil fruit ...",
-        default: "undefined",
+        // Aside: Since we employed Mongoose's schema type String property 'uppercase', the enclosed array of strings in 'enum' must be all uppercase
+        enum: ["UNDEFINED", "LOGIA", "PARAMECIA", "ZOAN", "MYTHICAL ZOAN", "ANCIENT ZOAN"],
+        message: `{VALUE} is not a valid type of devil fruit ...`,
+        default: "undefined", // no need for 'default' property when 'required: true' -- field needed
         uppercase: true,
         required: true
     },
@@ -27,7 +28,9 @@ const devilfruitSchema = new mongoose.Schema({
     },
     awakened: {
         type: Boolean,
-        default: false,
+        /* feels as though the 'default' property is a tad redundant with 'required: true' right below ...
+        because with 'required' being set to 'true' would NOT allow the field to be empty */
+        // default: false,  
         required: [true, `Please give an 'awakened' status`]
     }
 });
@@ -57,9 +60,9 @@ devilFruitSchema.statics.isAwakened = function(){
 }
 
 // index devil fruit schema by "moniker" in ascending order
-devilfruitSchema.index({moniker: 1});
+devilFruitSchema.index({moniker: 1});
 
 // use mongoose.model() method in Mongoose module to generate a collection of a MongoDB database
 // compile devil fruit schema into the model for later use and export to "devilFruitRoutes.mjs"
-// hereafter the "devilFruitSchema" is known by "Devil_Fruit"
+// hereafter the "devilFruitSchema" is known by "DevilFruit"
 export default mongoose.model("Devil_Fruit", devilFruitSchema);

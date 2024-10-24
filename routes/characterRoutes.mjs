@@ -135,7 +135,7 @@ router.get('/status/dead', async (req, res) => {
 });
 
 /* Update */
-// access an existing character by their :id & update their info
+// access an existing character by their :id & update their bio
 router.patch('/:id', async (req, res) => {
     try {
         /* Note: To use ANY Mongoose's methods, Mongoose must be connected to MongoDB which is here in "server.mjs" (connectDB() function invoked)

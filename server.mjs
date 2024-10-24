@@ -1,9 +1,11 @@
 // necessary imports for functioning server-side MongoDB database application
 import express from 'express';
 import dotenv from 'dotenv';
-import bodyParser from 'body-parser';   // import NPM package body-parser to parse incoming HTTP request bodies
-import connectDB from './db/conn.mjs';  // import connectDB function module to establish connection
-import characterRoutes from './routes/characterRoutes.mjs';
+import bodyParser from 'body-parser';                           // import NPM package body-parser to parse incoming HTTP request bodies
+import connectDB from './db/conn.mjs';                          // import connectDB function module to establish connection
+// bring in routes to the brain "server.mjs" to be run
+import characterRoutes from './routes/characterRoutes.mjs';     
+import devilFruitRoutes from './routes/devilFruitRoutes.mjs';   
 
 /* setting up */
 // unpack environmental variables from .env file here for later use
@@ -25,7 +27,8 @@ app.use(bodyParser.urlencoded({ extended: true }));     // parse out URL-encoded
 app.use(bodyParser.json({ extended: true }));           // parse out JSON data to req.body
 
 /* routes */
-app.use('/characters', characterRoutes);    // incorporate characterRoutes into server
+app.use('/characters', characterRoutes);     // incorporate characterRoutes into server
+app.use('/devil_fruits', devilFruitRoutes);  // connect devilFruitROutes to server.mjs (Note: Underscores are viewed as string literals in URI)
 
 // app.get('/names/name', (req, res) => {
 //     // to see Express' req.params properties
