@@ -63,7 +63,9 @@ router.get('/', async (req, res) => {
 // fetch single character by its unique "_id"
 // Side Note: required additional req.path /character added to req.baseUrl /characters else this GET route overshadows all other child routes built on base Url path /characters afterwards
 router.get('/character/:id', async (req, res) => {
+    // try-catch block to catch any possible errors from invalid :id insertion by user
     try {
+        /* Note: Since Mongoose inherently type-cast fields, there is no need to wrap the parameter id within ObjectId() */
         // use Mongoose's .findById() method to query by document's "_id"
         const singleCharacter = await Character.findById(req.params.id);
         /* Aside: res.send() method will also work here, but since we are working with Express -- develop RESTful API's ... 

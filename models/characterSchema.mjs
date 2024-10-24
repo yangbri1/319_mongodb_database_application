@@ -69,7 +69,7 @@ characterSchema.statics.wantedAlive = function(){
 // schema static method of "wantedDead" to Mongoose model
 characterSchema.statics.wantedDead = function(){
     // look for all characters with a wanted "DEAD" status presented using .find() method 
-    return mongoose.model("Character").find({ wanted: { $eq: "DEAD" } }); 
+    return mongoose.model("Character").find({ wanted: { $eq: "DEAD" } }); // different syntax but same as above (rarely use $eq operator)
 }
 
 // calling mongoose.model() function makes a copy on "characterSchema" & Mongoose compiles it
