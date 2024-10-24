@@ -8,6 +8,13 @@ export const devil_fruit = [
         awakened: false
     },
     {
+        name: "Cat-Cat Fruit",
+        type: "Zoan",
+        ability: "Transforms user either partially or fully into a leopard at will",
+        user: "Rob Lucci",
+        awakened: true
+    },
+    {
         name: "Dice-Dice Fruit",
         type: "Paramecia",
         ability: "Enables user's body to become as sharp as a steel blade",
@@ -22,22 +29,11 @@ export const devil_fruit = [
         awakened: true
     },
     {
-        name: "Cat-Cat Fruit",
-        type: "Zoan",
-        user: "Rob Lucci",
-        awakened: true
-    },
-    {
         name: "Gol-Gol Fruit",
         type: "Paramecia",
+        ability: "Gives user the Midas touch -- anything they touch turns into gold",
         user: "Gild Tesoro",
         awakened: true
-    },
-    {
-        name: "Dark-Dark Fruit",
-        type: "Logia",
-        user: "Marshall D. Teach",
-        awakened: false
     },
     {
         name: "Tremor-Tremor Fruit",
@@ -49,6 +45,7 @@ export const devil_fruit = [
     {
         name: "Snake-Snake Fruit",
         type: "Mythical Zoan",
+        ability: "Allow user to transform into an eight-headed hydra, where if one head goes missing it will divide into two",
         user: "Kurozumi Orochi",
         awakened: false
     },
@@ -80,4 +77,11 @@ export const devil_fruit = [
         user: "Donquixote Rosinante",
         awakened: false
     },
+    {
+        name: "Dark-Dark Fruit",
+        type: "Logia",
+        ability: "Nullify and copy other devil fruit powers on touch for a brief moment, control gravitational forces via a small black vortex",
+        user: "Marshall D. Teach",
+        awakened: false
+    }
 ]
