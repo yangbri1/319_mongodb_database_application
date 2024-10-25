@@ -48,15 +48,21 @@ devilFruitSchema.statics.typeParamecia = function(){
 }
 
 // static method for finding "Zoan" type devil fruits to model
-devilFruitSchema.statics.typeLogia = function(){
+devilFruitSchema.statics.typeZoan = function(){
     // return all kinds of "ZOAN" properties in the schema field "type"
-    return mongoose.model("Devil_Fruit").find({ type: { $match: "ZOAN" }}); // {$regex: /ZOAN/ }
+    return mongoose.model("Devil_Fruit").find({ type: { $regex: "/ZOAN$/" }}); // {$regex: /ZOAN/ }
 }
 
 // static method for finding all successfully "Awakened" devil fruits to model
 devilFruitSchema.statics.isAwakened = function(){
     // return every awakened devil fruit
     return mongoose.model("Devil_Fruit").find({ awakened: true}); 
+}
+
+// static method for finding all normal "Unawakened" devil fruits to model
+devilFruitSchema.statics.notAwakened = function(){
+    // return every awakened devil fruit
+    return mongoose.model("Devil_Fruit").find({ awakened: { $ne: true }}); 
 }
 
 // index devil fruit schema by "moniker" in ascending order

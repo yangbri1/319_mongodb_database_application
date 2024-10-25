@@ -102,7 +102,7 @@ router.get('/status', async (req, res) => {
     } catch (err) {
         // print out errors, error code, error message
         console.error(err);
-        res.status(500).json({msg: "Internal Server Error - GET Status"});
+        res.status(500).json({msg: "Internal Server Error - GET All Status"});
     }
 });
 
@@ -116,7 +116,7 @@ router.get('/status/alive', async (req, res) => {
     } catch (err) {
         // print out errors, error code, error message
         console.error(err);
-        res.status(500).json({msg: "Internal Server Error - GET Status"});
+        res.status(500).json({msg: "Internal Server Error - GET ALIVE Status"});
     }
 });
 
@@ -130,7 +130,7 @@ router.get('/status/dead', async (req, res) => {
     } catch (err) {
         // print out errors, error code, error message
         console.error(err);
-        res.status(500).json({msg: "Internal Server Error - GET Status"});
+        res.status(500).json({msg: "Internal Server Error - GET DEAD Status"});
     }
 });
 

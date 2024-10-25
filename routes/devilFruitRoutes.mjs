@@ -55,6 +55,90 @@ router.get('/', async (req, res) => {
     }
 });
 
+// grab a devil fruit document by its unique "_id"
+router.get('/devil_fruit/:id', async (req, res) => {
+    try {
+        // look for a particular devil fruit in the database by it's "_id"
+        const singleDevilFruit = await Devil_Fruit.findById(req.params.id);
+        // output a single devil fruit's full info document in JSON string format to browser
+        res.json(singleDevilFruit);
+    } catch (err) {
+        // catch any possible errors and return custom error code as well as message to client
+        console.error(err);
+        res.status(500).json({msg: "Internal Server Error - GET Devil Fruit (singular)"});
+    }
+});
+
+// find all "LOGIA" type devil fruits
+router.get('/category/logia', async (req, res) => {
+    try {
+        // collect all "LOGIA" devil fruits
+        const category_logia = await Devil_Fruit.typeLogia({});
+        // yield all "LOGIA" types
+        res.json(category_logia);
+    } catch (err) {
+        // prompts when any error is detected
+        console.error(err);
+        res.status(500).json({msg: "Internal Server Error - GET LOGIA Category"});
+    }
+});
+
+// find all "PARAMECA" type devil fruits
+router.get('/category/paramecia', async (req, res) => {
+    try {
+        // collect all "PARAMECIA" devil fruits
+        const category_paramecia = await Devil_Fruit.typeParamecia({});
+        // yield all "PARAMECIA" types
+        res.json(category_paramecia);
+    } catch (err) {
+        // prompts when any error is detected
+        console.error(err);
+        res.status(500).json({msg: "Internal Server Error - GET PARAMECIA Category"});
+    }
+});
+
+// find all "ZOAN", "MYTHICAL ZOAN", "ANCIENT ZOAN" type devil fruits
+router.get('/category/zoan', async (req, res) => {
+    try {
+        // collect all "ZOAN" devil fruits
+        const category_zoan = await Devil_Fruit.typeZoan({});
+        // yield all "ZOAN" types
+        res.json(category_zoan);
+    } catch (err) {
+        // prompts when any error is detected
+        console.error(err);
+        res.status(500).json({msg: "Internal Server Error - GET ZOAN Category"});
+    }
+});
+
+// find all "AWAKENED" devil fruits 
+router.get('/awakened', async (req, res) => {
+    try {
+        // collect all "AWAKENED" devil fruits
+        const awakened_fruits = await Devil_Fruit.isAwakened({});
+        // yield all "AWAKENED" types
+        res.json(awakened_fruits);
+    } catch (err) {
+        // prompts when any error is detected
+        console.error(err);
+        res.status(500).json({msg: "Internal Server Error - GET AWAKENED Category"});
+    }
+});
+
+// find all average "UNAWAKENED" devil fruits 
+router.get('/unawakened', async (req, res) => {
+    try {
+        // collect all "devil fruits with "UNAWAKENED" status
+        const sleeping_fruits = await Devil_Fruit.notAwakened({});
+        // yield all "UNAWAKENED" types
+        res.json(sleeping_fruits);
+    } catch (err) {
+        // prompts when any error is detected
+        console.error(err);
+        res.status(500).json({msg: "Internal Server Error - GET UNAWAKENED Category"});
+    }
+});
+
 /* UPDATE */
 // access an existing devil fruit by their :id & update their info
 router.patch('/:id', async (req, res) => {
