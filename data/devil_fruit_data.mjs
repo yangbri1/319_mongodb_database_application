@@ -1,4 +1,4 @@
-// devil fruits (Akuma no Mi) database
+// One Piece devil fruits (Akuma no Mi) database
 export const devil_fruit = [
     {
         moniker: "Brain-Brain Fruit",

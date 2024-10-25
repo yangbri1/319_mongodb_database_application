@@ -1,4 +1,4 @@
-// characters database 
+// One Piece characters database 
 export const characters = [
     {
         name: "Nami",
