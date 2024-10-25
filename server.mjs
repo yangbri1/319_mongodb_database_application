@@ -6,6 +6,7 @@ import connectDB from './db/conn.mjs';                          // import connec
 // bring in routes to the brain "server.mjs" to be run
 import characterRoutes from './routes/characterRoutes.mjs';     
 import devilFruitRoutes from './routes/devilFruitRoutes.mjs';   
+import kingdomRoutes from './routes/kingdomRoutes.mjs';
 
 /* setting up */
 // unpack environmental variables from .env file here for later use
@@ -29,6 +30,7 @@ app.use(bodyParser.json({ extended: true }));           // parse out JSON data t
 /* routes */
 app.use('/characters', characterRoutes);     // incorporate characterRoutes into server
 app.use('/devil_fruits', devilFruitRoutes);  // connect devilFruitROutes to server.mjs (Note: Underscores are viewed as string literals in URI)
+app.use('/kingdoms', kingdomRoutes);         // bring in kingdomRoutes to server.mjs
 
 // app.get('/names/name', (req, res) => {
 //     // to see Express' req.params properties

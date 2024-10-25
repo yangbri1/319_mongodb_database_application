@@ -13,6 +13,7 @@ const kingdomSchema = new mongoose.Schema({
     // Side Note: Why wasn't "location" field set to be "unique"? Because some kingdoms could share a location in the OP world
     location: {
         type: String,
+        // if no location was provide, validator error message would console.log() out on CLI
         required: [true, `Please provide a location for the kingdom`]
     },
     // field showing whether or not a kingdom abides to the central world government

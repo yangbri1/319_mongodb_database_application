@@ -11,8 +11,35 @@ const router = express.Router();
 // 4. wrap in try-catch for error-handling (why not? -- more transparency)
 
 /* CREATE */
+router.post('/', async (req, res) => {
+    try {
+        // initialize a new Kingdom from the req.body
+        const newKingdom = new Kingdom(req.body);
+        // saves the new Kingdom document into collection of Kingdoms if it passes validation rules
+        await newKingdom.save();
+        // prints out kingdoms
+        res.json({});
+    
+    // catch any errors 
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({msg: "Internal Server Error - POST"})
+    }
+});
 
 /* READ */
+router.get('/', async (req, res) => {
+    try {
+        // cache all kingdoms in the database to variable
+        const allKingdoms = await Kingdom.find({});
+        // print out collection of kingdoms in JSON string format to client
+        res.json(allKingdoms);
+    } catch (err) {
+        // catch any possible errors & print out error status and message
+        console.error(err);
+        res.status(500).json({msg: "Internal Server Error - GET All Kingdoms"});
+    }
+});
 
 /* UPDATE */
 
