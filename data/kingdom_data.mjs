@@ -13,7 +13,7 @@ export const kingdoms = [
     {
         name: "Lulusia Kingdom",
         location: "Paradise",
-        world_government: true 
+        // world_government: true 
     },
     {
         name: "Royal Sun Island",
