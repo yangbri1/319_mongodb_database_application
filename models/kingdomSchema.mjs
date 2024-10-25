@@ -39,5 +39,5 @@ kingdomSchema.statics.govUnaffiliated = function(){
     return mongoose.model("Kingdom").find({ world_government: { $eq: false }});
 }
 
-// export out kingdomSchema for later use in kingdom route creation
+// export out kingdomSchema for later use in kingdom route creation -- now referred to as "Kingdom"
 export default mongoose.model("Kingdom", kingdomSchema);
