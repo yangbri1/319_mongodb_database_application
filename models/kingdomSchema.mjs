@@ -16,6 +16,11 @@ const kingdomSchema = new mongoose.Schema({
         // if no location was provide, validator error message would console.log() out on CLI
         required: [true, `Please provide a location for the kingdom`]
     },
+    ruler: {
+        type: String,
+        default: "none"
+        // not a required field as some kingdom does NOT have royalty
+    },
     // field showing whether or not a kingdom abides to the central world government
     world_government: {
         type: Boolean,
