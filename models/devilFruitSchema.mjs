@@ -50,7 +50,9 @@ devilFruitSchema.statics.typeParamecia = function(){
 // static method for finding "Zoan" type devil fruits to model
 devilFruitSchema.statics.typeZoan = function(){
     // return all kinds of "ZOAN" properties in the schema field "type"
-    return mongoose.model("Devil_Fruit").find({ type: { $regex: "/ZOAN$/" }}); // {$regex: /ZOAN/ }
+    // return mongoose.model("Devil_Fruit").find({ type: { $ne: "/bZOAN/b" }}); // {$regex: /ZOAN/ }, {$match: "ZOAN"}
+    /* Note:  Above both $regex and $match didn't work -- here logical $and with equality $ne (not equal) operators combing multiple conditions worked */
+    return mongoose.model("Devil_Fruit").find({ $and: [{ type: { $ne: "LOGIA" }}, { type: { $ne: "PARAMECIA"} }] });
 }
 
 // static method for finding all successfully "Awakened" devil fruits to model
