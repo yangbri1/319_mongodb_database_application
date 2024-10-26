@@ -83,7 +83,7 @@ router.get('/category/logia', async (req, res) => {
     }
 });
 
-// find all "PARAMECA" type devil fruits
+// find all "PARAMECIA" type devil fruits
 router.get('/category/paramecia', async (req, res) => {
     try {
         // collect all "PARAMECIA" devil fruits
