@@ -44,8 +44,8 @@ router.get('/', async (req, res) => {
 });
 
 // look up an kingdom by its req.params id linking to its unique "_id" in database
-/* Note: Seem to not affect GET routes after this one if using just "/:id" in path but previously it did.
-Keeping the path URL to "/kingdom/:id" [just in case] */
+/* Note: Seem to not affect GET routes after this one if using just "/:id" in path but previously it did in last module for Express (318_SBA).
+Keeping the path URL to "/kingdom/:id" for reading [just in case] */
 router.get('/kingdom/:id', async (req, res) => {
     try {
         // survey the kingdoms collection for a partcular kingdom by its "_id" using MongoDB .findById() method 
